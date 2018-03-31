@@ -1,0 +1,15 @@
+{
+  "name": "gravity-parser",
+  "version": "0.0.1",
+  "description": "Gravity Defield maps parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "k-egor-smirnov <esmirnov.xyz@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "iconv-lite": "^0.4.19"
+  }
+}
