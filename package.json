@@ -1,6 +1,6 @@
 {
   "name": "gravity-parser",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Gravity Defield maps parser",
   "main": "index.js",
   "scripts": {
