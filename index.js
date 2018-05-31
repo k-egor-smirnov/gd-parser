@@ -20,21 +20,21 @@ module.exports = async (path) => {
 
     let offset = 0
     // Parse levels description
-    for(let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
         // Level tracks count
         const count = readInt(file, offset)
 
         const level = []
-        for(let i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             const trackOffset = readInt(file)
             let nameBytes = []
 
             // Read title bytes
-            while(nameBytes[nameBytes.length - 1] != 0x00) {
+            while (nameBytes[nameBytes.length - 1] != 0x00) {
                 const byte = readByte(file, offset)
                 nameBytes.push(byte)
             }
-        
+
             // Parse title bytes into UTF-8 string
             const titleBuf = new Buffer(nameBytes)
             const title = iconv.encode(iconv.decode(titleBuf, "cp1251"), "utf8").toString();
@@ -49,30 +49,30 @@ module.exports = async (path) => {
     }
 
     // Parse tracks
-    for(let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
         const level = []
 
-        for(let j = 0; j < levelsDescription[i].length; j++) {
+        for (let j = 0; j < levelsDescription[i].length; j++) {
             offset = levelsDescription[i][j].offset
-            
+
             const mark = readByte(file, offset) // First byte of track, unused
             const start = readIntCoordinates()
             const finish = readIntCoordinates()
             const pointsCount = readShort(file)
-            
+
             const first = readIntCoordinates(false)
 
             const points = [first]
-            for(let k = 0; k < pointsCount - 1; k++) {
+            for (let k = 0; k < pointsCount - 1; k++) {
                 let point = readByteCoordinates(false)
 
                 if (point.x === -1) {
                     offset -= BYTE_SIZE * 2
-                    point = readIntCoordinates(false) 
+                    point = readIntCoordinates(false)
                 }
 
                 const { x: lastX, y: lastY } = points[points.length - 1]
-                
+
                 points.push({
                     x: point.x += lastX,
                     y: point.y += lastY
@@ -93,7 +93,7 @@ module.exports = async (path) => {
     }
 
     return levels
-    
+
     // HELPERS
 
     function readInt(buf) {
@@ -114,7 +114,7 @@ module.exports = async (path) => {
         const short = buf.readIntBE(offset, SHORT_SIZE)
         offset += SHORT_SIZE
 
-        return short 
+        return short
     }
 
     function readIntCoordinates(decompress = true) {
@@ -122,7 +122,7 @@ module.exports = async (path) => {
             return {
                 x: parseCoordinate(readInt(file)),
                 y: parseCoordinate(readInt(file))
-            }   
+            }
         } else {
             return {
                 x: readInt(file),
@@ -136,7 +136,7 @@ module.exports = async (path) => {
             return {
                 x: parseCoordinate(readByte(file)),
                 y: parseCoordinate(readByte(file))
-            }   
+            }
         } else {
             return {
                 x: readByte(file),
