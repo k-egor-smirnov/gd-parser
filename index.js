@@ -30,8 +30,11 @@ module.exports = async path => {
       let nameBytes = [];
 
       // Read title bytes
-      while (nameBytes[nameBytes.length - 1] != 0x00) {
+      while (nameBytes.length < 40) {
         const byte = readByte(file, offset);
+        if (byte == 0x00) {
+          break;
+        }
         nameBytes.push(byte);
       }
 
