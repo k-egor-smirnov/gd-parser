@@ -80,6 +80,7 @@ module.exports = async (path) => {
             }
 
             const track = {
+                title: levelsDescription[i][j].title,
                 start,
                 finish,
                 pointsCount,
