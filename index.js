@@ -68,7 +68,7 @@ module.exports = async path => {
       const first = readIntCoordinates(false);
 
       const points = [first];
-      for (let k = 1; k < pointsCount - 1; k++) {
+      for (let k = 1; k < pointsCount; k++) {
         let point = readByteCoordinates(false);
 
         if (point.x === -1) {
