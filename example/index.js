@@ -1,7 +1,7 @@
 const fs = require('fs')
-const gdParser = require('gravity-parser')
+const gdParser = require('../index')
 
-gdParser('./78.mrg')
+gdParser.readFromFile('./78.mrg')
     .then(result => {
         fs.writeFile('./output.json', JSON.stringify(result), err => {
             if (err) console.log(err)

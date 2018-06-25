@@ -6,15 +6,17 @@ const INT_SIZE = 4;
 const SHORT_SIZE = 2;
 const BYTE_SIZE = 1;
 
+readFromFile = async path => {
+  return await readFromBuffer(await fs.readFileAsync(path));
+};
+
 /**
  * Returns parsed JSON of Gravity Defield levels
  * @see {@link http://gdtr.net/handbook/mrg/} to see .mrg composition
  * @param {String} path Path to .mrg file
  * @returns {Object} Object contains title and pointers of map
  */
-module.exports = async path => {
-  const file = await fs.readFileAsync(path);
-
+readFromBuffer = async file => {
   const levels = [];
   const levelsDescription = [];
 
@@ -155,4 +157,9 @@ module.exports = async path => {
   function parseCoordinate(number) {
     return (number << 3) >> 16;
   }
+};
+
+module.exports = {
+  readFromFile,
+  readFromBuffer
 };
