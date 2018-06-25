@@ -9,7 +9,6 @@
   "author": "k-egor-smirnov <esmirnov.xyz@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.5.1",
     "iconv-lite": "^0.4.19"
   }
 }

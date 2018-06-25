@@ -1,5 +1,4 @@
-const Promise = require("bluebird").Promise;
-const fs = Promise.promisifyAll(require("fs"));
+const fs = require("fs");
 const iconv = require("iconv-lite");
 
 const INT_SIZE = 4;
@@ -7,7 +6,7 @@ const SHORT_SIZE = 2;
 const BYTE_SIZE = 1;
 
 readFromFile = async path => {
-  return await readFromBuffer(await fs.readFileAsync(path));
+  return await readFromBuffer(fs.readFileSync(path));
 };
 
 /**
